@@ -245,22 +245,46 @@ const PRODUCTS: Product[] = [
 ];
 
 function HomePage({ onAddToCart }: { onAddToCart: (p: Product) => void }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const heroImages = [
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776983852/enhance_the_image_202604231734_nhlyjj.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776984021/remove_the_words_202604231739_iklc9k.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776983851/remove_this_word_202604231733_yv6lqr.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776983848/remove_the_words_202604231737_xgvqaf.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776983850/enhance_image_quality_202604231734_hog9ec.jpg"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % heroImages.length);
+    }, 6000); // Slower interval
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   return (
     <>
-      <section className="pt-[90px] px-6 md:px-10 mb-6 reveal overflow-hidden">
-        <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[calc(100vh-160px)]">
-          {/* Left Panel */}
+      <section className="pt-[140px] md:pt-[200px] px-6 md:px-10 mb-6 reveal overflow-hidden">
+        <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[calc(100vh-200px)]">
+          {/* Left Panel - Slideshow */}
           <div className="flex-grow h-[450px] md:h-[550px] lg:h-full rounded-[40px] overflow-hidden relative group">
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline
-              className="w-full h-full object-cover"
-              src="https://res.cloudinary.com/dad155oxi/video/upload/v1776935497/Evane_hero_section_vid_Final_ecnjzh.mp4"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-600/60 via-stone-400/20 to-transparent"></div>
-            <div className="absolute bottom-12 left-12 flex items-baseline group pointer-events-none">
+            {heroImages.map((src, idx) => (
+              <div 
+                key={idx}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${
+                  idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                }`}
+              >
+                <img 
+                  src={src} 
+                  alt={`Hero Slide ${idx + 1}`} 
+                  className={`w-full h-full object-cover transform transition-transform duration-[8000ms] ease-out ${
+                    idx === currentSlide ? 'scale-110' : 'scale-100'
+                  }`}
+                />
+              </div>
+            ))}
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-600/60 via-stone-400/20 to-transparent z-20"></div>
+            <div className="absolute bottom-12 left-12 flex items-baseline group pointer-events-none z-30">
               <h1 className="font-display font-medium text-white mix-blend-overlay text-5xl md:text-7xl leading-none tracking-tighter uppercase">
                 EVANÉ
               </h1>
@@ -315,8 +339,8 @@ function AboutPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideImages = [
     "https://res.cloudinary.com/dad155oxi/image/upload/v1776929488/evane_model_sdpgcf.jpg",
-    "https://res.cloudinary.com/dad155oxi/image/upload/v1776930148/evane_model_3_oetagk.jpg",
-    "https://res.cloudinary.com/dad155oxi/image/upload/v1776930150/evane_model_2_cel7co.jpg"
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776930150/evane_model_2_cel7co.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776983851/enhance_the_quality_202604231731_uvl3tu.jpg"
   ];
 
   useEffect(() => {
@@ -377,8 +401,8 @@ function AboutPage() {
           <div className="flex flex-col lg:flex-row gap-4 stagger-item">
             <div className="w-full lg:w-64 h-80 lg:h-auto self-stretch rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
-                src="https://res.cloudinary.com/dad155oxi/image/upload/v1776930657/WhatsApp_Image_2026-04-23_at_2.49.12_AM_ixoab4.jpg" 
-                alt="Process detail" 
+                src="https://res.cloudinary.com/dad155oxi/image/upload/v1776930148/evane_model_3_oetagk.jpg" 
+                alt="Our Story" 
                 className="w-full h-full object-cover transition-luxury hover:scale-110"
               />
             </div>
@@ -439,7 +463,7 @@ function CollectionsPage({ onAddToCart }: { onAddToCart: (p: Product) => void })
       {/* SIDEBAR ZONE - SCROLL ZONE 1 */}
       <aside 
         data-lenis-prevent
-        className="w-full md:w-[280px] h-auto md:h-full border-b md:border-b-0 md:border-r border-wire flex flex-col shrink-0 p-6 pt-28 md:p-8 md:pt-32 relative z-20 bg-white md:overflow-y-auto custom-scrollbar"
+        className="w-full md:w-[280px] h-auto md:h-full border-b md:border-b-0 md:border-r border-wire flex flex-col shrink-0 p-6 pt-36 md:p-8 md:pt-40 relative z-20 bg-white md:overflow-y-auto custom-scrollbar"
       >
         <div className="mb-12">
           <h4 className="text-[10px] tracking-[0.5em] font-bold mb-2 uppercase opacity-40">FILTERS</h4>
@@ -508,7 +532,7 @@ function CollectionsPage({ onAddToCart }: { onAddToCart: (p: Product) => void })
       {/* MAIN CONTENT ZONE - SCROLL ZONE 2 */}
       <div 
         data-lenis-prevent
-        className="flex-grow h-auto md:h-full md:overflow-y-auto custom-scrollbar p-6 pt-10 md:p-6 md:pt-32 pb-32 md:pr-2 stagger-section"
+        className="flex-grow h-auto md:h-full md:overflow-y-auto custom-scrollbar p-6 pt-10 md:p-6 md:pt-40 pb-32 md:pr-2 stagger-section"
       >
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-4 gap-y-10">
@@ -541,7 +565,7 @@ function CollectionsPage({ onAddToCart }: { onAddToCart: (p: Product) => void })
 
 function ContactPage() {
   return (
-    <section className="pt-32 px-6 md:px-10 mb-24 reveal min-h-screen">
+    <section className="pt-40 px-6 md:px-10 mb-24 reveal min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div className="space-y-12">
           <div className="space-y-6">
@@ -683,6 +707,7 @@ function ProductCard({ product, onAddToCart, className = "" }: ProductCardProps)
 function TopNavBar({ cartCount, onOpenCart }: { cartCount: number; onOpenCart: () => void }) {
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
+  const isHomePage = location.pathname === '/';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
 
@@ -708,10 +733,13 @@ function TopNavBar({ cartCount, onOpenCart }: { cartCount: number; onOpenCart: (
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 h-[100px] pl-6 pr-4 md:pl-12 md:pr-6 lg:pl-16 lg:pr-8 flex justify-between items-center transition-colors duration-500 pointer-events-none bg-transparent`}>
-        <Link to="/" className={`flex items-baseline flex-shrink-0 group pointer-events-auto transition-colors ${leftTextColorClass}`}>
-          <span className="text-xl font-display font-bold tracking-tighter">EVANÉ</span>
-          <span className="font-display italic text-2xl ml-1 lowercase leading-none opacity-80 group-hover:opacity-100 transition-luxury">hair</span>
+      <nav className={`fixed top-0 w-full z-50 ${isHomePage ? 'h-[140px] md:h-[200px]' : 'h-[120px] md:h-[140px]'} pl-6 pr-4 md:pl-12 md:pr-6 lg:pl-16 lg:pr-8 flex justify-between items-center transition-all duration-500 pointer-events-none bg-transparent`}>
+        <Link to="/" className={`flex items-center flex-shrink-0 group pointer-events-auto transition-colors ${leftTextColorClass}`}>
+          <img 
+            src="https://res.cloudinary.com/dad155oxi/image/upload/v1776969672/Evane_Logo_White_background_transparent_acr70p.png" 
+            alt="EVANÉ hair COLLECTION" 
+            className={`h-24 md:h-32 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${isAboutPage && !isScrolledPastHero ? 'brightness-0 invert' : ''}`}
+          />
         </Link>
         <div className={`hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2 pointer-events-auto transition-colors ${leftTextColorClass}`}>
           <Link to="/collections" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">COLLECTIONS</Link>
@@ -738,10 +766,13 @@ function TopNavBar({ cartCount, onOpenCart }: { cartCount: number; onOpenCart: (
 
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 bg-stone-50 z-[60] flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} lg:hidden pointer-events-auto text-black`}>
-        <div className="h-[100px] pl-6 pr-4 md:pl-12 md:pr-6 w-full flex justify-between items-center border-b border-black/10">
-          <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-baseline flex-shrink-0 group">
-            <span className="text-xl font-display font-bold tracking-tighter">EVANÉ</span>
-            <span className="font-display italic text-2xl ml-1 lowercase leading-none opacity-80">hair</span>
+        <div className={`pl-6 pr-4 md:pl-12 md:pr-6 w-full flex justify-between items-center border-b border-black/10 ${isHomePage ? 'h-[140px] md:h-[200px]' : 'h-[120px] md:h-[140px]'}`}>
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center flex-shrink-0 group">
+            <img 
+              src="https://res.cloudinary.com/dad155oxi/image/upload/v1776969672/Evane_Logo_White_background_transparent_acr70p.png" 
+              alt="EVANÉ hair COLLECTION" 
+              className="h-20 w-auto object-contain"
+            />
           </Link>
           <button onClick={() => setIsMenuOpen(false)} className="hover:opacity-50 transition-luxury flex items-center gap-5">
             <X size={24} strokeWidth={1.5} />
@@ -859,7 +890,11 @@ function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove }: {
             items.map((item) => (
               <div key={item.id} className="flex gap-6 animate-in slide-in-from-right-4 duration-500">
                 <div className="w-24 aspect-[4/5] bg-[#EDEDED] border border-wire overflow-hidden shrink-0">
-                  <div className="w-full h-full wireframe-placeholder" />
+                  {item.image ? (
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full wireframe-placeholder" />
+                  )}
                 </div>
                 <div className="flex-grow flex flex-col justify-between py-1">
                   <div className="space-y-1">
@@ -930,7 +965,11 @@ function Footer() {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-7xl mx-auto">
         <div className="space-y-8">
-          <h2 className="text-2xl font-bold tracking-tighter">EVANÉ</h2>
+          <img 
+            src="https://res.cloudinary.com/dad155oxi/image/upload/v1776969672/Evane_Logo_White_background_transparent_acr70p.png" 
+            alt="EVANÉ hair COLLECTION" 
+            className="h-24 w-auto object-contain"
+          />
           <p className="text-[10px] tracking-[0.2em] leading-relaxed opacity-40 uppercase">
             Artisanal hair science from London. Built for the modern silhouette.
           </p>
@@ -968,11 +1007,11 @@ function Footer() {
         </div>
       </div>
       <div className="mt-24 pt-8 border-t border-black/5 flex justify-between items-end text-[8px] tracking-[0.4em] opacity-30 uppercase font-bold max-w-7xl mx-auto">
-        <div className="flex items-baseline gap-1">
+        <div className="flex items-baseline gap-1 scale-110 origin-left">
           <span>© 2024</span>
-          <span className="font-display font-bold text-[10px] tracking-tight">EVANÉ</span>
-          <span className="font-display italic text-lg normal-case tracking-normal">hair</span>
-          <span className="ml-1 tracking-[0.4em]">COLLECTION</span>
+          <span className="font-display font-bold text-xs tracking-tight">EVANÉ</span>
+          <span className="font-display italic text-xl normal-case tracking-normal">hair</span>
+          <span className="ml-1 text-[8px] tracking-[0.5em]">COLLECTION</span>
         </div>
         <span>MADE BY VOLTZDIGITAL</span>
       </div>
