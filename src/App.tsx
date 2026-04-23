@@ -327,9 +327,9 @@ function AboutPage() {
   }, [slideImages.length]);
 
   return (
-    <section className="h-screen w-full flex overflow-hidden border-t border-black bg-white relative z-30">
+    <section className="h-auto lg:h-screen w-full flex flex-col lg:flex-row overflow-hidden border-t border-black bg-white relative z-30">
       {/* LEFT PANEL: STATIC MAG CANVAS (60%) */}
-      <div className="w-[60%] h-full flex items-end p-12 border-r border-black relative shrink-0 overflow-hidden bg-[#EDEDED]">
+      <div className="w-full lg:w-[60%] h-[60vh] lg:h-full flex items-end p-6 lg:p-12 border-b lg:border-b-0 lg:border-r border-black relative shrink-0 overflow-hidden bg-[#EDEDED]">
         {slideImages.map((src, idx) => (
           <img 
             key={idx}
@@ -338,28 +338,28 @@ function AboutPage() {
             className={`absolute inset-0 w-full h-full object-cover mix-blend-multiply transition-all duration-[1500ms] ease-in-out hover:scale-105 ${idx === currentSlide ? 'opacity-80 z-10' : 'opacity-0 z-0'}`}
           />
         ))}
-        <h2 className="text-[16vw] font-display select-none uppercase -ml-4 -mb-4 relative z-10 leading-none text-black/15 pointer-events-none">
+        <h2 className="text-[25vw] md:text-[22vw] lg:text-[16vw] font-display select-none uppercase -ml-4 -mb-4 relative z-10 leading-none text-black/15 pointer-events-none">
           ABOUT
         </h2>
       </div>
 
       {/* SCROLL INDICATOR PILL - AT THE SEAM */}
-      <div className="absolute bottom-10 left-[60%] -translate-x-1/2 z-40 bg-white border border-black rounded-full px-2 py-6 flex flex-col items-center gap-6 shadow-sm transition-luxury hover:scale-110">
+      <div className="hidden lg:flex absolute bottom-10 left-[60%] -translate-x-1/2 z-40 bg-white border border-black rounded-full px-2 py-6 flex-col items-center gap-6 shadow-sm transition-luxury hover:scale-110">
         <span className="vertical-text text-[10px] tracking-[0.5em] font-bold opacity-30 uppercase">SCROLL</span>
         <div className="w-[1px] h-16 bg-black/20" />
       </div>
 
       {/* RIGHT PANEL: INDEPENDENT SCROLL ZONE (40%) */}
-      <div className="w-[40%] h-full overflow-y-auto custom-scrollbar bg-white relative z-20" data-lenis-prevent>
-        <div className="p-10 flex flex-col gap-12 pb-40 stagger-section">
-          <div className="flex flex-row gap-4 stagger-item">
-            <div className="flex-1 rounded-[40px] border border-black p-10 flex flex-col justify-center space-y-6">
-              <h3 className="text-3xl uppercase tracking-widest font-display">WHO ARE WE?</h3>
+      <div className="w-full lg:w-[40%] h-auto lg:h-full overflow-y-auto custom-scrollbar bg-white relative z-20" data-lenis-prevent>
+        <div className="p-6 lg:p-10 flex flex-col gap-12 pb-40 stagger-section">
+          <div className="flex flex-col lg:flex-row gap-4 stagger-item">
+            <div className="flex-1 rounded-[40px] border border-black p-8 md:p-10 flex flex-col justify-center space-y-6">
+              <h3 className="text-2xl lg:text-3xl uppercase tracking-widest font-display">WHO WE ARE</h3>
               <p className="text-sm leading-relaxed opacity-70">
                 We specialize in premium hair care formulations and artisanal extensions. We create high-quality, sustainable and visually refined hair products for brands and creators.
               </p>
             </div>
-            <div className="w-32 h-64 rounded-[40px] border border-black overflow-hidden shrink-0">
+            <div className="w-full lg:w-32 h-64 rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
                 src="https://res.cloudinary.com/dad155oxi/image/upload/v1776926695/WhatsApp_Image_2026-04-23_at_1.42.55_AM_ibh2ik.jpg" 
                 alt="Artisanal detail" 
@@ -368,14 +368,14 @@ function AboutPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 stagger-item">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 stagger-item">
             <AboutValueCard title="PREMIUM QUALITY" subtext="COLD-PRESSED ESSENCE" />
             <AboutValueCard title="HAND CRAFTED" subtext="SMALL BATCH" />
             <AboutValueCard title="DESIGN FOCUSED" subtext="MODERN SCIENCE" />
           </div>
 
-          <div className="flex flex-row gap-4 stagger-item">
-            <div className="w-40 h-auto self-stretch rounded-[40px] border border-black overflow-hidden shrink-0">
+          <div className="flex flex-col lg:flex-row gap-4 stagger-item">
+            <div className="w-full lg:w-40 h-64 lg:h-auto self-stretch rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
                 src="https://res.cloudinary.com/dad155oxi/image/upload/v1776930657/WhatsApp_Image_2026-04-23_at_2.49.12_AM_ixoab4.jpg" 
                 alt="Process detail" 
@@ -435,11 +435,11 @@ function CollectionsPage({ onAddToCart }: { onAddToCart: (p: Product) => void })
   });
 
   return (
-    <section className="h-screen w-full flex overflow-hidden bg-white">
+    <section className="h-auto md:h-screen w-full flex flex-col md:flex-row md:overflow-hidden bg-white">
       {/* SIDEBAR ZONE - SCROLL ZONE 1 */}
       <aside 
         data-lenis-prevent
-        className="w-[280px] h-full border-r border-wire flex flex-col shrink-0 p-8 pt-32 relative z-20 bg-white overflow-y-auto custom-scrollbar"
+        className="w-full md:w-[280px] h-auto md:h-full border-b md:border-b-0 md:border-r border-wire flex flex-col shrink-0 p-6 pt-28 md:p-8 md:pt-32 relative z-20 bg-white md:overflow-y-auto custom-scrollbar"
       >
         <div className="mb-12">
           <h4 className="text-[10px] tracking-[0.5em] font-bold mb-2 uppercase opacity-40">FILTERS</h4>
@@ -508,10 +508,10 @@ function CollectionsPage({ onAddToCart }: { onAddToCart: (p: Product) => void })
       {/* MAIN CONTENT ZONE - SCROLL ZONE 2 */}
       <div 
         data-lenis-prevent
-        className="flex-grow h-full overflow-y-auto custom-scrollbar p-6 pt-32 pb-32 pr-2 stagger-section"
+        className="flex-grow h-auto md:h-full md:overflow-y-auto custom-scrollbar p-6 pt-10 md:p-6 md:pt-32 pb-32 md:pr-2 stagger-section"
       >
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 gap-y-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-4 gap-y-10">
             {filteredProducts.map((product) => (
               <ProductCard 
                 key={product.id}
@@ -616,7 +616,7 @@ function ContactPage() {
 
 function AboutValueCard({ title, subtext }: { title: string; subtext: string }) {
   return (
-    <div className="rounded-[30px] border border-black p-6 flex flex-col items-center text-center space-y-4">
+    <div className="flex-1 rounded-[30px] border border-black p-4 py-8 xl:p-6 flex flex-col items-center text-center space-y-4">
       <div className="flex gap-0.5">
         {[...Array(5)].map((_, i) => (
           <Star key={i} size={12} fill="black" strokeWidth={0} className="scale-75" />
@@ -681,28 +681,79 @@ function ProductCard({ product, onAddToCart, className = "" }: ProductCardProps)
 }
 
 function TopNavBar({ cartCount, onOpenCart }: { cartCount: number; onOpenCart: () => void }) {
+  const location = useLocation();
+  const isAboutPage = location.pathname === '/about';
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+
+  useEffect(() => {
+    if (!isAboutPage) return;
+    
+    const handleScroll = () => {
+      // Change color once we scroll past the hero image which is 60vh on mobile
+      const threshold = window.innerHeight * 0.6 - 80;
+      setIsScrolledPastHero(window.scrollY > threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isAboutPage]);
+
+  const leftTextColorClass = isAboutPage ? `${isScrolledPastHero ? 'text-black' : 'text-white'} md:text-black lg:text-white` : 'text-black';
+  const rightTextColorClass = isAboutPage ? `${isScrolledPastHero ? 'text-black' : 'text-white'} md:text-black lg:text-black` : 'text-black';
+  const cartIndicatorClass = isAboutPage 
+    ? `${isScrolledPastHero ? 'bg-black text-white border-white' : 'bg-white text-black border-transparent'} md:bg-black md:text-white md:border-white lg:bg-black lg:border-white lg:text-white`
+    : 'bg-black text-white border-white';
+
   return (
-    <nav className="fixed top-0 w-full z-50 h-[100px] px-8 md:px-16 flex justify-between items-center bg-transparent">
-      <Link to="/" className="flex items-baseline flex-shrink-0 group">
-        <span className="text-xl font-display font-bold tracking-tighter">EVANÉ</span>
-        <span className="font-display italic text-2xl ml-1 lowercase leading-none opacity-80 group-hover:opacity-100 transition-luxury">hair</span>
-      </Link>
-      <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-        <Link to="/collections" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">COLLECTIONS</Link>
-        <Link to="/about" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">ABOUT US</Link>
-        <Link to="/contact" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">CONTACT US</Link>
+    <>
+      <nav className={`fixed top-0 w-full z-50 h-[100px] pl-6 pr-4 md:pl-12 md:pr-6 lg:pl-16 lg:pr-8 flex justify-between items-center transition-colors duration-500 pointer-events-none bg-transparent`}>
+        <Link to="/" className={`flex items-baseline flex-shrink-0 group pointer-events-auto transition-colors ${leftTextColorClass}`}>
+          <span className="text-xl font-display font-bold tracking-tighter">EVANÉ</span>
+          <span className="font-display italic text-2xl ml-1 lowercase leading-none opacity-80 group-hover:opacity-100 transition-luxury">hair</span>
+        </Link>
+        <div className={`hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2 pointer-events-auto transition-colors ${leftTextColorClass}`}>
+          <Link to="/collections" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">COLLECTIONS</Link>
+          <Link to="/about" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">ABOUT US</Link>
+          <Link to="/contact" className="text-[10px] font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-luxury">CONTACT US</Link>
+        </div>
+        <div className={`flex items-center flex-shrink-0 pointer-events-auto gap-5 transition-colors ${rightTextColorClass}`}>
+          <button 
+            onClick={() => setIsMenuOpen(true)}
+            className="lg:hidden hover:opacity-50 transition-luxury relative"
+          >
+            <Menu size={20} strokeWidth={1.5} />
+          </button>
+          <button onClick={onOpenCart} className="hover:opacity-50 transition-luxury relative">
+            <ShoppingBag size={20} strokeWidth={1.5} />
+            {cartCount > 0 && (
+              <span className={`absolute -top-1 -right-1 text-[8px] w-4 h-4 rounded-full flex items-center justify-center border transition-colors ${cartIndicatorClass}`}>
+                {cartCount}
+              </span>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 bg-stone-50 z-[60] flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} lg:hidden pointer-events-auto text-black`}>
+        <div className="h-[100px] pl-6 pr-4 md:pl-12 md:pr-6 w-full flex justify-between items-center border-b border-black/10">
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-baseline flex-shrink-0 group">
+            <span className="text-xl font-display font-bold tracking-tighter">EVANÉ</span>
+            <span className="font-display italic text-2xl ml-1 lowercase leading-none opacity-80">hair</span>
+          </Link>
+          <button onClick={() => setIsMenuOpen(false)} className="hover:opacity-50 transition-luxury flex items-center gap-5">
+            <X size={24} strokeWidth={1.5} />
+          </button>
+        </div>
+        <div className="flex flex-col gap-8 mt-16 px-6 md:px-12">
+          <Link to="/collections" onClick={() => setIsMenuOpen(false)} className="text-3xl font-display uppercase tracking-widest hover:opacity-50 transition-luxury">Collections</Link>
+          <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-3xl font-display uppercase tracking-widest hover:opacity-50 transition-luxury">About Us</Link>
+          <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="text-3xl font-display uppercase tracking-widest hover:opacity-50 transition-luxury">Contact Us</Link>
+        </div>
       </div>
-      <div className="flex items-center flex-shrink-0">
-        <button onClick={onOpenCart} className="hover:opacity-50 transition-luxury relative">
-          <ShoppingBag size={20} strokeWidth={1.5} />
-          {cartCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-black text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center border border-white">
-              {cartCount}
-            </span>
-          )}
-        </button>
-      </div>
-    </nav>
+    </>
   );
 }
 
