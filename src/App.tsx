@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Lenis from 'lenis';
-import { ShoppingBag, User, ArrowRight, ArrowUpRight, Menu, Plus, Check, ChevronDown, Star, Mail, MapPin, Phone, X, ArrowDown } from 'lucide-react';
+import { ShoppingBag, User, ArrowRight, ArrowUpRight, Menu, Plus, Check, ChevronDown, Star, Mail, MapPin, Phone, X, ArrowDown, Lock, ShieldCheck, CreditCard } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -248,16 +248,16 @@ function HomePage({ onAddToCart }: { onAddToCart: (p: Product) => void }) {
   return (
     <>
       <section className="pt-[90px] px-6 md:px-10 mb-6 reveal overflow-hidden">
-        <div className="flex flex-col md:flex-row gap-6 h-auto md:h-[calc(100vh-160px)]">
+        <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[calc(100vh-160px)]">
           {/* Left Panel */}
-          <div className="flex-grow h-[300px] md:h-full rounded-[40px] overflow-hidden relative group">
+          <div className="flex-grow h-[450px] md:h-[550px] lg:h-full rounded-[40px] overflow-hidden relative group">
             <video 
               autoPlay 
               muted 
               loop 
               playsInline
               className="w-full h-full object-cover"
-              src="https://res.cloudinary.com/dad155oxi/video/upload/v1776916650/baby_.jewels_ft_our_26_Burmese_Raw_Unit_Hair_specs_26_jnkv0u.mp4"
+              src="https://res.cloudinary.com/dad155oxi/video/upload/v1776935497/Evane_hero_section_vid_Final_ecnjzh.mp4"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-stone-600/60 via-stone-400/20 to-transparent"></div>
             <div className="absolute bottom-12 left-12 flex items-baseline group pointer-events-none">
@@ -268,27 +268,27 @@ function HomePage({ onAddToCart }: { onAddToCart: (p: Product) => void }) {
           </div>
           
           {/* Right Column Cards */}
-          <div className="w-full md:w-[320px] lg:w-[380px] flex flex-col gap-4 stagger-section h-full">
+          <div className="w-full lg:w-[380px] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-4 stagger-section lg:h-full">
             <HeroCategoryCard 
               category="01" 
               title="Collections" 
               image="https://res.cloudinary.com/dad155oxi/image/upload/v1776926154/WhatsApp_Image_2026-04-23_at_1.33.01_AM_wc7t0i.jpg"
               link="/collections"
-              className="stagger-item" 
+              className="stagger-item md:min-h-[250px] lg:min-h-0" 
             />
             <HeroCategoryCard 
               category="02" 
               title="About Us" 
-              image="https://res.cloudinary.com/dad155oxi/image/upload/v1776919139/WhatsApp_Image_2026-04-22_at_11.01.51_PM_qj53ul.jpg"
+              image="https://res.cloudinary.com/dad155oxi/image/upload/v1776926695/WhatsApp_Image_2026-04-23_at_1.42.55_AM_ibh2ik.jpg"
               link="/about"
-              className="stagger-item" 
+              className="stagger-item md:min-h-[250px] lg:min-h-0" 
             />
             <HeroCategoryCard 
               category="03" 
               title="Contact Us" 
               video="https://res.cloudinary.com/dad155oxi/video/upload/v1776926695/Evane_bag_Gif_zwgusm.mp4"
               link="/contact"
-              className="stagger-item" 
+              className="stagger-item md:min-h-[250px] lg:min-h-0" 
             />
           </div>
         </div>
@@ -359,9 +359,9 @@ function AboutPage() {
                 We specialize in premium hair care formulations and artisanal extensions. We create high-quality, sustainable and visually refined hair products for brands and creators.
               </p>
             </div>
-            <div className="w-full lg:w-32 h-64 rounded-[40px] border border-black overflow-hidden shrink-0">
+            <div className="w-full lg:w-48 xl:w-56 h-80 rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
-                src="https://res.cloudinary.com/dad155oxi/image/upload/v1776926695/WhatsApp_Image_2026-04-23_at_1.42.55_AM_ibh2ik.jpg" 
+                src="https://res.cloudinary.com/dad155oxi/image/upload/v1776919139/WhatsApp_Image_2026-04-22_at_11.01.51_PM_qj53ul.jpg" 
                 alt="Artisanal detail" 
                 className="w-full h-full object-cover transition-luxury hover:scale-110"
               />
@@ -375,7 +375,7 @@ function AboutPage() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-4 stagger-item">
-            <div className="w-full lg:w-40 h-64 lg:h-auto self-stretch rounded-[40px] border border-black overflow-hidden shrink-0">
+            <div className="w-full lg:w-64 h-80 lg:h-auto self-stretch rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
                 src="https://res.cloudinary.com/dad155oxi/image/upload/v1776930657/WhatsApp_Image_2026-04-23_at_2.49.12_AM_ixoab4.jpg" 
                 alt="Process detail" 
@@ -800,17 +800,17 @@ function HeroCategoryCard({ category, title, image, video, link, className = "" 
       </div>
       
       {/* Bottom Left: SEE MORE + Line */}
-      <div className="absolute bottom-6 left-6 z-10 flex items-center gap-3 w-1/2">
-        <span className="text-[#f8f5f0] text-[10px] tracking-[0.2em] font-medium whitespace-nowrap">SEE MORE</span>
-        <div className="h-[1px] bg-[#f8f5f0]/80 flex-grow"></div>
+      <div className="absolute bottom-5 left-5 md:bottom-6 md:left-6 z-10 flex items-center gap-2 right-24 md:right-[130px]">
+        <span className="text-[#f8f5f0] text-[8px] md:text-[10px] tracking-[0.2em] font-medium whitespace-nowrap">SEE MORE</span>
+        <div className="h-[1px] bg-[#f8f5f0]/80 flex-grow min-w-0"></div>
       </div>
 
       {/* Bottom Right: Cutout Block */}
-      <div className="absolute bottom-0 right-0 z-10 bg-black rounded-tl-[20px] pl-5 pt-3 pb-3 pr-4 flex items-center gap-3 transition-transform group-hover:bg-neutral-900">
-        <span className="text-[#ebd9b1] text-[10px] tracking-[0.2em] font-bold uppercase whitespace-nowrap">
+      <div className="absolute bottom-0 right-0 z-20 bg-black rounded-tl-[20px] pl-4 pt-3 pb-3 pr-4 flex items-center gap-2 transition-transform group-hover:bg-neutral-900">
+        <span className="text-[#ebd9b1] text-[8px] md:text-[10px] tracking-[0.2em] font-bold uppercase whitespace-nowrap">
           {bottomText}
         </span>
-        <div className="w-7 h-7 rounded-full border border-[#ebd9b1]/30 flex items-center justify-center text-[#ebd9b1] group-hover:bg-[#ebd9b1] group-hover:text-black transition-luxury">
+        <div className="w-6 h-6 md:w-7 md:h-7 rounded-full border border-[#ebd9b1]/30 flex items-center justify-center text-[#ebd9b1] group-hover:bg-[#ebd9b1] group-hover:text-black transition-luxury shrink-0">
           <ArrowRight size={12} />
         </div>
       </div>
@@ -894,6 +894,16 @@ function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove }: {
           <button className="w-full bg-black text-white py-5 text-[10px] tracking-[0.3em] font-bold hover:bg-neutral-800 transition-luxury uppercase disabled:opacity-30 disabled:pointer-events-none" disabled={items.length === 0}>
             PROCEED TO CHECKOUT
           </button>
+          
+          <div className="flex flex-col items-center gap-2 pt-2">
+            <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-widest text-center text-black">
+              <CreditCard size={12} className="text-[#2C9CED]" />
+              <span>Secure Checkout via <span className="font-bold">WHOP</span></span>
+            </div>
+            <p className="text-[7px] text-neutral-400 text-center tracking-widest uppercase">
+              Credit Cards & PayPal Accepted | 256-bit SSL
+            </p>
+          </div>
         </div>
       </div>
     </>
@@ -902,8 +912,23 @@ function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemove }: {
 
 function Footer() {
   return (
-    <footer className="border-t border-black/10 py-24 px-10">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
+    <footer className="border-t border-black/10 pt-16 pb-24 px-4 md:px-10">
+      <div className="max-w-7xl mx-auto mb-20 bg-[#0f0f0f] text-white py-6 px-4 rounded-xl flex flex-col items-center justify-center gap-5 border border-white/10 shadow-xl">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] sm:text-[11px] md:text-xs font-medium tracking-wide text-center">
+          <span className="flex items-center gap-1.5"><CreditCard size={14} className="text-[#2C9CED]" /> Secure Checkout via <span className="font-bold tracking-widest">WHOP</span></span>
+          <span className="opacity-30 hidden lg:inline">|</span>
+          <span className="text-neutral-300">Credit Cards & PayPal Accepted</span>
+          <span className="opacity-30 hidden lg:inline">|</span>
+          <span className="text-neutral-300">256-bit SSL Encryption</span>
+        </div>
+        <div className="flex items-center gap-5 opacity-50">
+          <CreditCard size={18} />
+          <ShieldCheck size={18} />
+          <Lock size={18} />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-7xl mx-auto">
         <div className="space-y-8">
           <h2 className="text-2xl font-bold tracking-tighter">EVANÉ</h2>
           <p className="text-[10px] tracking-[0.2em] leading-relaxed opacity-40 uppercase">
@@ -942,14 +967,14 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mt-24 pt-8 border-t border-black/5 flex justify-between items-end text-[8px] tracking-[0.4em] opacity-30 uppercase font-bold">
+      <div className="mt-24 pt-8 border-t border-black/5 flex justify-between items-end text-[8px] tracking-[0.4em] opacity-30 uppercase font-bold max-w-7xl mx-auto">
         <div className="flex items-baseline gap-1">
           <span>© 2024</span>
           <span className="font-display font-bold text-[10px] tracking-tight">EVANÉ</span>
           <span className="font-display italic text-lg normal-case tracking-normal">hair</span>
           <span className="ml-1 tracking-[0.4em]">COLLECTION</span>
         </div>
-        <span>CRAFTED IN LONDON</span>
+        <span>MADE BY VOLTZDIGITAL</span>
       </div>
     </footer>
   );
