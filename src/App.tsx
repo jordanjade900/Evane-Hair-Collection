@@ -272,52 +272,25 @@ function HomePage({ onAddToCart }: { onAddToCart: (p: Product) => void }) {
             <HeroCategoryCard 
               category="01" 
               title="Collections" 
-              image="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2069&auto=format&fit=crop"
+              image="https://res.cloudinary.com/dad155oxi/image/upload/v1776926154/WhatsApp_Image_2026-04-23_at_1.33.01_AM_wc7t0i.jpg"
               link="/collections"
               className="stagger-item" 
             />
             <HeroCategoryCard 
               category="02" 
               title="About Us" 
-              image="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2069&auto=format&fit=crop"
+              image="https://res.cloudinary.com/dad155oxi/image/upload/v1776919139/WhatsApp_Image_2026-04-22_at_11.01.51_PM_qj53ul.jpg"
               link="/about"
               className="stagger-item" 
             />
             <HeroCategoryCard 
               category="03" 
               title="Contact Us" 
-              image="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=2070&auto=format&fit=crop"
+              video="https://res.cloudinary.com/dad155oxi/video/upload/v1776926695/Evane_bag_Gif_zwgusm.mp4"
               link="/contact"
               className="stagger-item" 
             />
           </div>
-        </div>
-      </section>
-
-      {/* Featured Arrivals */}
-      <section className="px-6 md:px-10 py-24 bg-white">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 stagger-section">
-           <div className="max-w-2xl stagger-item">
-              <span className="text-[10px] tracking-[0.4em] uppercase font-bold opacity-30 mb-4 block">Seasonal Selection</span>
-              <h2 className="text-3xl md:text-5xl font-display leading-[0.9] tracking-tighter uppercase">
-                 Curated <span className="italic font-display lowercase text-4xl md:text-6xl normal-case">fiber</span> <br/>
-                 Excellence
-              </h2>
-           </div>
-           <Link to="/collections" className="stagger-item group flex items-center gap-4 text-[10px] tracking-[0.3em] font-bold uppercase border-b border-black pb-2 hover:opacity-50 transition-luxury">
-              View All Arrivals <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-luxury" />
-           </Link>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 stagger-section">
-           {PRODUCTS.slice(0, 4).map((product) => (
-             <ProductCard 
-               key={product.id} 
-               product={product} 
-               onAddToCart={() => onAddToCart(product)} 
-               className="stagger-item"
-             />
-           ))}
         </div>
       </section>
 
@@ -725,20 +698,61 @@ function TopNavBar({ cartCount, onOpenCart }: { cartCount: number; onOpenCart: (
   );
 }
 
-function HeroCategoryCard({ category, title, image, link, className = "" }: { category: string; title: string; image: string; link: string; className?: string }) {
+function HeroCategoryCard({ category, title, image, video, link, className = "" }: { category: string; title: string; image?: string; video?: string; link: string; className?: string }) {
+  // Determine bottom text based on the title to resemble the reference
+  const bottomText = title.toUpperCase() === "COLLECTIONS" ? "SHOP" : title.split(" ")[0].toUpperCase();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) videoRef.current.play().catch(() => {});
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) videoRef.current.pause();
+  };
+
   return (
-    <Link to={link} className={`flex-1 rounded-[28px] border hairline-border bg-stone-50 overflow-hidden group transition-luxury relative cursor-pointer ${className}`}>
-      <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-luxury group-hover:scale-110 grayscale group-hover:grayscale-0" />
-      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-luxury"></div>
-      <div className="relative z-10 p-5 lg:p-7 h-full flex flex-col justify-between group-hover:text-black">
-        <div>
-          <span className="text-[10px] font-bold tracking-[0.3em] uppercase opacity-40">0{category}</span>
-          <h3 className="text-xl lg:text-2xl font-display mt-1 uppercase">{title}</h3>
-        </div>
-        <div className="flex justify-end">
-          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-luxury">
-            <ArrowUpRight size={18} strokeWidth={1} />
-          </div>
+    <Link 
+      to={link} 
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`flex-1 rounded-[28px] border hairline-border bg-stone-50 overflow-hidden group transition-luxury relative cursor-pointer block min-h-[280px] md:min-h-[0] ${className}`}
+    >
+      {video ? (
+        <video 
+          ref={videoRef}
+          src={video}
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-luxury group-hover:scale-110"
+          poster={image}
+        />
+      ) : (
+        <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-luxury group-hover:scale-110" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/60 transition-luxury"></div>
+      
+      {/* Top Left Text */}
+      <div className="absolute top-6 left-6 z-10 w-28">
+        <h3 className="text-[#f8f5f0] text-lg lg:text-xl font-display uppercase tracking-widest leading-snug">
+          {title.split(' ').map((word, i) => <span key={i} className="block">{word}</span>)}
+        </h3>
+      </div>
+      
+      {/* Bottom Left: SEE MORE + Line */}
+      <div className="absolute bottom-6 left-6 z-10 flex items-center gap-3 w-1/2">
+        <span className="text-[#f8f5f0] text-[10px] tracking-[0.2em] font-medium whitespace-nowrap">SEE MORE</span>
+        <div className="h-[1px] bg-[#f8f5f0]/80 flex-grow"></div>
+      </div>
+
+      {/* Bottom Right: Cutout Block */}
+      <div className="absolute bottom-0 right-0 z-10 bg-black rounded-tl-[20px] pl-5 pt-3 pb-3 pr-4 flex items-center gap-3 transition-transform group-hover:bg-neutral-900">
+        <span className="text-[#ebd9b1] text-[10px] tracking-[0.2em] font-bold uppercase whitespace-nowrap">
+          {bottomText}
+        </span>
+        <div className="w-7 h-7 rounded-full border border-[#ebd9b1]/30 flex items-center justify-center text-[#ebd9b1] group-hover:bg-[#ebd9b1] group-hover:text-black transition-luxury">
+          <ArrowRight size={12} />
         </div>
       </div>
     </Link>
