@@ -312,16 +312,33 @@ function HomePage({ onAddToCart }: { onAddToCart: (p: Product) => void }) {
 }
 
 function AboutPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideImages = [
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776929488/evane_model_sdpgcf.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776930148/evane_model_3_oetagk.jpg",
+    "https://res.cloudinary.com/dad155oxi/image/upload/v1776930150/evane_model_2_cel7co.jpg"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % slideImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [slideImages.length]);
+
   return (
     <section className="h-screen w-full flex overflow-hidden border-t border-black bg-white relative z-30">
       {/* LEFT PANEL: STATIC MAG CANVAS (60%) */}
       <div className="w-[60%] h-full flex items-end p-12 border-r border-black relative shrink-0 overflow-hidden bg-[#EDEDED]">
-        <img 
-          src="https://images.unsplash.com/photo-1559599101-f09722fb4948?q=80&w=2787&auto=format&fit=crop" 
-          alt="Editorial hair concept" 
-          className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply transition-luxury hover:scale-105"
-        />
-        <h2 className="text-[16vw] font-display select-none uppercase -ml-4 -mb-4 relative z-10 leading-none text-black/5 pointer-events-none">
+        {slideImages.map((src, idx) => (
+          <img 
+            key={idx}
+            src={src} 
+            alt={`About slide ${idx + 1}`} 
+            className={`absolute inset-0 w-full h-full object-cover mix-blend-multiply transition-all duration-[1500ms] ease-in-out hover:scale-105 ${idx === currentSlide ? 'opacity-80 z-10' : 'opacity-0 z-0'}`}
+          />
+        ))}
+        <h2 className="text-[16vw] font-display select-none uppercase -ml-4 -mb-4 relative z-10 leading-none text-black/15 pointer-events-none">
           ABOUT
         </h2>
       </div>
@@ -344,7 +361,7 @@ function AboutPage() {
             </div>
             <div className="w-32 h-64 rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1590439471364-192aa70c0b53?q=80&w=2787&auto=format&fit=crop" 
+                src="https://res.cloudinary.com/dad155oxi/image/upload/v1776926695/WhatsApp_Image_2026-04-23_at_1.42.55_AM_ibh2ik.jpg" 
                 alt="Artisanal detail" 
                 className="w-full h-full object-cover transition-luxury hover:scale-110"
               />
@@ -360,7 +377,7 @@ function AboutPage() {
           <div className="flex flex-row gap-4 stagger-item">
             <div className="w-40 h-auto self-stretch rounded-[40px] border border-black overflow-hidden shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2069&auto=format&fit=crop" 
+                src="https://res.cloudinary.com/dad155oxi/image/upload/v1776930657/WhatsApp_Image_2026-04-23_at_2.49.12_AM_ixoab4.jpg" 
                 alt="Process detail" 
                 className="w-full h-full object-cover transition-luxury hover:scale-110"
               />
@@ -373,17 +390,15 @@ function AboutPage() {
               </div>
               <div className="space-y-4">
                 <h4 className="text-xl uppercase tracking-widest font-display">OUR STORY</h4>
-                <p className="text-xs leading-relaxed italic-display opacity-60 italic font-display">
+                <p className="text-xs leading-relaxed italic-display opacity-80 italic font-display">
                   "Bridging artisanal heritage and modern fiber science."
                 </p>
-              </div>
-              <p className="text-[11px] leading-relaxed opacity-70">
-                Every strand undergoes a proprietary purification process that preserves natural integrity.
-              </p>
-              <div className="pt-4">
-                <button className="text-[10px] tracking-widest uppercase font-bold border-b border-black pb-1 hover:opacity-50 transition-opacity">
-                  Read Manifesto
-                </button>
+                <div className="text-[11px] leading-[1.8] opacity-70 space-y-4">
+                  <p>Every strand undergoes a proprietary purification process that preserves natural integrity.</p>
+                  <p className="uppercase tracking-[0.2em] font-medium border-t border-black/10 pt-4 mt-2">
+                    Purified strand integrity. <br/> Artisanal fiber science.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -487,13 +502,6 @@ function CollectionsPage({ onAddToCart }: { onAddToCart: (p: Product) => void })
               </div>
             </div>
           </div>
-        </div>
-
-        {/* MANIFESTO BLOCK */}
-        <div className="mt-auto pt-10 border-t border-black/10">
-          <p className="text-[9px] leading-[1.8] tracking-[0.3em] uppercase opacity-30 text-center">
-            Purified strand integrity.<br/>Artisanal fiber science.
-          </p>
         </div>
       </aside>
 
